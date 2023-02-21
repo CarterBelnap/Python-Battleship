@@ -5,12 +5,8 @@
 
 #AMMO "0" PROBLEM
 #AMMO INCREASE PROBLEM
-#"PLAY" AT START PROBLEM
 #WIN/LOSE SCREEN
 #PLAY AGAIN-TRUE LOOP?
-#TIMER
-
-
 
 #Imports
 import random,os,time
@@ -22,7 +18,7 @@ time.sleep(2)
 print("\n TYPE ""PLAY"" TO START")
 time.sleep(2)
 
-if input("PLAY").upper:
+if input().upper()=="PLAY":
     os.system("cls")
     run=True
     e=1
@@ -47,6 +43,7 @@ if input("PLAY").upper:
     #BOARD CARD
     # 1 2 2 4 4 
     # 1 3 3 3 5
+    
     # 7 7 6 6 5
     # 8 9  9  9  10
     # 8 11 11 11 10
@@ -137,11 +134,12 @@ if input("PLAY").upper:
         print("----------------")
         while i<25:
             print(f"{row} {board[i]} {board[i+1]} {board[i+2]} {board[i+3]} {board[i+4]}")
+            
             i+=5
             row+=1
 
-#ASCII Guessing UI
-        print(f"Ammo = {ammo}")
+#ASCII Guessing UI + WIN/LOSE
+        print(f"Ammo Remaining = {ammo}")
         try:   
             guess=(input("Guess Where The Ships Are!:")).upper()
             letter=guess[0]
@@ -171,6 +169,7 @@ if input("PLAY").upper:
             else:
                 print("Please Enter A Valid Number!")
                 time.sleep(2)
+                ammo+=1
             if ammo==0:   
                 time.sleep(1)
                 print("YOU LOSE")
@@ -181,16 +180,13 @@ if input("PLAY").upper:
                 time.sleep(1)
                 print("TYPE NO TO QUIT")
                 time.sleep(2)
-                if input("PLAY").upper:
+                if input().upper()=="PLAY":
+                    run=True
+                if input().upper()=="QUIT":
                     run=False
-
-
-            
             
             os.system("cls")
             ammo-=1  
         except:
                 print("Please Enter A Valid Guess!")
-                time.sleep(2)       
-
-    
+                time.sleep(2)      

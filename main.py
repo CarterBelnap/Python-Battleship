@@ -6,7 +6,7 @@
 #AMMO "0" PROBLEM
 #AMMO INCREASE PROBLEM
 #WIN/LOSE SCREEN
-#PLAY AGAIN-TRUE LOOP?
+
 
 #Imports
 import random,os,time
@@ -47,81 +47,53 @@ def ship_board():
     # 8 11 11 11 10
     
 #Ship 1 Placement
-    if shiprandom==1:
+    if shiprandom==1 or shiprandom2==1:
         ships[0] = "H "
         ships[5] = "H "
         num_hits +=2
-    if shiprandom==2:
+    if shiprandom==2 or shiprandom2==2:
         ships[1] = "H "
         ships[2] = "H "
-    if shiprandom==3:
+        num_hits +=2
+    if shiprandom==3 or shiprandom2==3:
         ships[6] = "H "
         ships[7] = "H "
         ships[8] = "H "
-    if shiprandom==4:
+        num_hits +=3
+    if shiprandom==4 or shiprandom2==4:
         ships[3] = "H "
         ships[4] = "H "
-    if shiprandom==5:
+        num_hits +=2
+    if shiprandom==5 or shiprandom2==5:
         ships[9] = "H "
         ships[14] = "H "
-    if shiprandom==6:
+        num_hits +=2
+    if shiprandom==6 or shiprandom2==6:
         ships[12] = "H "
         ships[13] = "H "
-    if shiprandom==7:
+        num_hits +=2
+    if shiprandom==7 or shiprandom2==7:
         ships[10] = "H "
         ships[11] = "H "
-    if shiprandom==8:
+        num_hits +=2
+    if shiprandom==8 or shiprandom2==8:
         ships[15] = "H "
         ships[20] = "H "
-    if shiprandom==9:
+        num_hits +=2
+    if shiprandom==9 or shiprandom2==9:
         ships[16] = "H "
         ships[17] = "H "
         ships[18] = "H "
-    if shiprandom==10:
+        num_hits +=3
+    if shiprandom==10 or shiprandom2==10:
         ships[19] = "H "
         ships[24] = "H "
-    if shiprandom==11:
+        num_hits +=2
+    if shiprandom==11 or shiprandom2==11:
         ships[21] = "H "
         ships[22] = "H "
         ships[23] = "H "
-#Ship 2 Placement
-    if shiprandom2==1:
-        ships[0] = "H "
-        ships[5] = "H "
-    if shiprandom2==2:
-        ships[1] = "H "
-        ships[2] = "H "
-    if shiprandom2==3:
-        ships[6] = "H "
-        ships[7] = "H "
-        ships[8] = "H "
-    if shiprandom2==4:
-        ships[3] = "H "
-        ships[4] = "H "
-    if shiprandom2==5:
-        ships[9] = "H "
-        ships[14] = "H "
-    if shiprandom2==6:
-        ships[12] = "H "
-        ships[13] = "H "
-    if shiprandom2==7:
-        ships[10] = "H "
-        ships[11] = "H "
-    if shiprandom2==8:
-        ships[15] = "H "
-        ships[20] = "H "
-    if shiprandom2==9:
-        ships[16] = "H "
-        ships[17] = "H "
-        ships[18] = "H "
-    if shiprandom2==10:
-        ships[19] = "H "
-        ships[24] = "H "
-    if shiprandom2==11:
-        ships[21] = "H "
-        ships[22] = "H "
-        ships[23] = "H "
-
+        num_hits +=3
 
 def print_board():
     i=0
@@ -154,12 +126,15 @@ def hit_ship(board):
                         
 
 #Bootup Screen
-time.sleep(1)
-print("\n WELCOME TO BATTLESHIP")
-time.sleep(2)
-print("\n TYPE ""PLAY"" TO START")
-time.sleep(2)
+def main_menu():
+    time.sleep(1)
+    print("\nWELCOME TO BATTLESHIP")
+    time.sleep(2)
+    print("\nTYPE PLAY TO START")
+    time.sleep(2)
 
+
+main_menu()
 if input().upper()=="PLAY":
     make_board()
     ship_board()
@@ -219,6 +194,7 @@ if input().upper()=="PLAY":
                     ship_board()
                 if result=="QUIT":
                     run=False
+                    main_menu()
            
                 
                         

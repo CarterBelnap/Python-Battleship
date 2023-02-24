@@ -2,12 +2,6 @@
 # Feburary 7th 2023
 # Battleship Program
 
-
-#AMMO "0" PROBLEM
-#AMMO INCREASE PROBLEM
-#WIN/LOSE SCREEN
-
-
 #Imports
 import random,os,time
 
@@ -18,6 +12,7 @@ def make_board():
     e=1
     board=[]    
     ammo = 15
+    
 #Board Printing
     while e<=25:
         board.append("A"+str(e))
@@ -26,27 +21,40 @@ def make_board():
         board.append("D"+str(e))
         board.append("E"+str(e))
         e+=1
+        
+#Board Printing
+def print_board():
+    i=0
+    row=1 
+    print("\n")
+    print("  A  B  C  D  E ")
+    print("----------------")
+    while i<25:
+        print(f"{row} {board[i]} {board[i+1]} {board[i+2]} {board[i+3]} {board[i+4]}")
+        
+        i+=5
+        row+=1 
 
+#Ship Randomizer 
 def ship_board():
-    #Ship Randomizer     
-    global ships,num_hits
+       
+    global ships,num_hits 
+    num_hits=0
     shiprandom = random.randint(0,11)
     shiprandom2 = random.randint(0,11)
     while shiprandom==shiprandom2:
-        shiprandom2 = random.randint(0,11)
-        
+        shiprandom2 = random.randint(0,11)    
     ships=["M "]*25
-    num_hits=0
+   
               
     #BOARD CARD
     # 1 2 2 4 4 
     # 1 3 3 3 5
-    
     # 7 7 6 6 5
     # 8 9  9  9  10
     # 8 11 11 11 10
     
-#Ship 1 Placement
+#Ship Placement
     if shiprandom==1 or shiprandom2==1:
         ships[0] = "H "
         ships[5] = "H "
@@ -95,35 +103,24 @@ def ship_board():
         ships[23] = "H "
         num_hits +=3
 
-def print_board():
-    i=0
-    row=1 
-    print("\n")
-    print("  A  B  C  D  E ")
-    print("----------------")
-    while i<25:
-        print(f"{row} {board[i]} {board[i+1]} {board[i+2]} {board[i+3]} {board[i+4]}")
-        
-        i+=5
-        row+=1 
 
+#Scan Hits + WIN
 def hit_ship(board):
     global ammo
-    for i in board:
-        hits=0
-        if i == "H":
-            hits+=1
-            ammo+=3
+    hits=0
+    for i in board:        
+        if i == "H ":
+            hits+=1         
     if num_hits==hits:
-                print("YOU WIN")
-                time.sleep(1)
-                print("TRY AGAIN?")
-                time.sleep(1)
-                print("TYPE PLAY TO TRY AGAIN")
-                time.sleep(1)
-                print("TYPE NO TO QUIT")
-                time.sleep(2)
-                        
+        print("YOU WIN")
+        time.sleep(1)
+        print("TRY AGAIN?")
+        time.sleep(1)
+        print("TYPE PLAY TO TRY AGAIN")
+        time.sleep(1)
+        print("TYPE NO TO QUIT")
+        time.sleep(2)
+                
 
 #Bootup Screen
 def main_menu():
@@ -133,7 +130,7 @@ def main_menu():
     print("\nTYPE PLAY TO START")
     time.sleep(2)
 
-
+#Main Menu
 main_menu()
 if input().upper()=="PLAY":
     make_board()
@@ -145,14 +142,13 @@ if input().upper()=="PLAY":
 #Board/UI Printing
         print_board()
    
-#ASCII Guessing UI + WIN/LOSE
+#ASCII Guessing UI + LOSE
         print(f"Ammo Remaining = {ammo}")
         try:   
             guess=(input("Guess Where The Ships Are!:")).upper()
             letter=guess[0]
             row=(int(guess[1])-1)*5
-            
-                
+   
             if letter=="A":
                 start_v=0
             elif letter=="B":
@@ -174,6 +170,7 @@ if input().upper()=="PLAY":
                 else:
                     board[row + start_v]= ships[row + start_v]
                     ammo-=1 
+                    hit_ship(board)
             else:
                 print("Please Enter A Valid Number!")
                 time.sleep(2)
@@ -202,4 +199,5 @@ if input().upper()=="PLAY":
              
         except:
                 print("Please Enter A Valid Guess!")
-                time.sleep(2)      
+                time.sleep(1)
+                os.system("cls")      
